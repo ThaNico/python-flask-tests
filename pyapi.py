@@ -1,4 +1,5 @@
 import flask
+from flask import request, jsonify
 
 print("Hello world 1")
 print("Hello" + " " + "world 2")
@@ -15,5 +16,21 @@ app.config["DEBUG"] = True
 @app.route('/', methods=['GET'])
 def home():
     return "<h1>Hello World</h1>"
+    
+    
+stock = [
+    {'id': 0,
+     'product': 'corde',
+     'stock': 42},
+    {'id': 1,
+     'product': 'baudrier',
+     'stock': 0}
+]
+
+@app.route('/api/stock/all', methods=['GET'])
+def api_show_all_stock():
+    return jsonify(stock)
+
+
 
 app.run()
