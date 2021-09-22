@@ -27,10 +27,26 @@ stock = [
      'stock': 0}
 ]
 
+
 @app.route('/api/stock/all', methods=['GET'])
 def api_show_all_stock():
     return jsonify(stock)
 
 
+@app.route('/api/stock', methods=['GET'])
+def api_show_specific_stock():
+    API_PARAM_PRODUCT = "product"
+    if API_PARAM_PRODUCT in request.args:
+        product = request.args[API_PARAM_PRODUCT]
+    else:
+        return "Error: please specify {} parameter.".format(API_PARAM_PRODUCT)
+
+    results = []
+    
+    for s in stock:
+        if s[API_PARAM_PRODUCT] == product:
+            results.append(s)
+
+    return jsonify(results)
 
 app.run()
