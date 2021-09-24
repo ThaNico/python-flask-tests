@@ -28,13 +28,23 @@ stock = [
      'stock': 0}
 ]
 
-class Stock(Resource):
-    
+class StockAll(Resource):
     def get(self):
         return stock, 200
+api.add_resource(StockAll, '/api/stock/all')
 
 
-api.add_resource(Stock, '/api/stock')
+class StockSpecific(Resource):
+    def get(self, product):
+        results = []
+    
+        for s in stock:
+            if s["product"] == product:
+                results.append(s)
+
+        return results, 200
+api.add_resource(StockSpecific, '/api/stock/<string:product>')
+
 
 if __name__ == '__main__':
     app.run()
