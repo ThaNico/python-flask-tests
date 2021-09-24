@@ -1,5 +1,4 @@
-import flask
-from flask import request, jsonify
+from flask import Flask, request, jsonify
 
 print("Hello world 1")
 print("Hello" + " " + "world 2")
@@ -9,7 +8,7 @@ print("Hello {name} 5".format(name="world"))
 name = "world"
 print(f"Hello {name} 6")
 
-app = flask.Flask(__name__)
+app = Flask(__name__)
 app.config["DEBUG"] = True
 
 
